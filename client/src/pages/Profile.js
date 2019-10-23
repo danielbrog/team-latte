@@ -139,7 +139,7 @@ export default function ProfilePage(props) {
         console.log(res.projects);
         setProjects(res.projects);
       }
-    });
+    }, []);
     authFetch({ url: `/userInvestments/${props.match.params.id}` }).then(
       res => {
         if (res.error) {
@@ -151,7 +151,7 @@ export default function ProfilePage(props) {
         }
       }
     );
-  }, [props.match.params.id]);
+  }, []);
 
   //console.log(profile)
   const classes = useStyles();
@@ -170,7 +170,9 @@ export default function ProfilePage(props) {
     setValue(newValue);
   };
 
-  return (
+  return !profile ? (
+    <div></div>
+  ) : (
     <React.Fragment>
       <Grid container justify="center">
         {/* Left part */}
@@ -183,8 +185,10 @@ export default function ProfilePage(props) {
           <Grid container direction="column" spacing={3}>
             <Grid container justify="center" alignItems="center">
               <Avatar
-                alt={profile.name}
-                src={profile.profilePic.link}
+                alt={!profile ? "" : profile.name}
+                src={
+                  !profile || !profile.profilePic ? "" : profile.profilePic.link
+                }
                 className={classes.bigAvatar}
               />
             </Grid>
@@ -196,7 +200,7 @@ export default function ProfilePage(props) {
               className="full-name"
             >
               <Typography variant="h4" gutterBottom>
-                {profile.name}
+                {!profile ? "" : profile.name}
               </Typography>
             </Grid>
 
@@ -208,7 +212,7 @@ export default function ProfilePage(props) {
             >
               <Typography variant="body2" color="textSecondary" gutterBottom>
                 <LocationOnIcon />
-                {profile.location}
+                {!profile ? "" : profile.location}
               </Typography>
             </Grid>
 
@@ -232,7 +236,7 @@ export default function ProfilePage(props) {
             </Grid>
 
             <Grid container justify="center" alignItems="center">
-              <Fields fieldsData={profile.expertise} />
+              <Fields fieldsData={!profile ? [] : profile.expertise} />
             </Grid>
 
             <Grid container justify="center">
