@@ -111,7 +111,11 @@ export default function EditDialog(props) {
               <Grid item style={{ border: "2px solid red" }}>
                 <Avatar
                   alt={!profile ? "" : profile.name}
-                  src={!profile ? "" : profile.profilePic.link}
+                  src={
+                    !profile || !profile.profilePic
+                      ? ""
+                      : profile.profilePic.link
+                  }
                   className={classes.bigAvatar}
                 />
 
