@@ -170,8 +170,7 @@ export default function ProfilePage(props) {
     setValue(newValue);
   };
 
-  return profile && projects ? (
-    //set up a condition to render only if profile and project isn't null
+  return (
     <React.Fragment>
       <Grid container justify="center">
         {/* Left part */}
@@ -294,7 +293,5 @@ export default function ProfilePage(props) {
         </Grid>
       </Grid>
     </React.Fragment>
-  ) : (
-    <div>Error</div>
   );
 }
