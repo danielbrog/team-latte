@@ -29,7 +29,8 @@ router.post("/project", auth, upload.array("images", 5), async (req, res) => {
     ...req.body,
     photos: [],
     author: req.user._id,
-    authorName: req.user.name
+    authorName: req.user.name,
+    funding_goal: parseFloat(req.body.fundingGoal)
   });
 
   // console.log(project.author);
