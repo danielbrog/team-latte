@@ -110,8 +110,8 @@ export default function EditDialog(props) {
             >
               <Grid item style={{ border: "2px solid red" }}>
                 <Avatar
-                  alt={profile.name}
-                  src={profile.profilePic.link}
+                  alt={!profile ? "" : profile.name}
+                  src={!profile ? "" : profile.profilePic.link}
                   className={classes.bigAvatar}
                 />
 
@@ -122,7 +122,7 @@ export default function EditDialog(props) {
                   margin="normal"
                   variant="standard"
                   label="Name"
-                  value={profile.name}
+                  value={!profile ? "" : profile.name}
                   onChange={e => {
                     const val = e.target.value;
                     setProfile(prevState => {
@@ -140,7 +140,7 @@ export default function EditDialog(props) {
                   margin="normal"
                   variant="standard"
                   label="Location"
-                  value={profile.location}
+                  value={!profile ? "" : profile.location}
                   onChange={e => {
                     const val = e.target.value;
                     setProfile(prevState => {
@@ -158,7 +158,7 @@ export default function EditDialog(props) {
                   margin="normal"
                   variant="standard"
                   label="linkedIn"
-                  value={profile.linkedIn}
+                  value={!profile ? "" : profile.linkedIn}
                   onChange={e => {
                     const val = e.target.value;
                     setProfile(prevState => {
@@ -175,7 +175,7 @@ export default function EditDialog(props) {
                   margin="normal"
                   variant="standard"
                   label="angelList"
-                  value={profile.angelList}
+                  value={!profile ? "" : profile.angelList}
                   onChange={e => {
                     const val = e.target.value;
                     setProfile(prevState => {
@@ -192,7 +192,7 @@ export default function EditDialog(props) {
                   margin="normal"
                   variant="standard"
                   label="expertise"
-                  value={profile.expertise}
+                  value={!profile ? "" : profile.expertise}
                   onChange={e => {
                     const val = e.target.value;
                     setProfile(prevState => {
