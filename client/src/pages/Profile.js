@@ -186,7 +186,9 @@ export default function ProfilePage(props) {
             <Grid container justify="center" alignItems="center">
               <Avatar
                 alt={!profile ? "" : profile.name}
-                src={!profile ? "" : profile.profilePic.link}
+                src={
+                  !profile || !profile.profilePic ? "" : profile.profilePic.link
+                }
                 className={classes.bigAvatar}
               />
             </Grid>
