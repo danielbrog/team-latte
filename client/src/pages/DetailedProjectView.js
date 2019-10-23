@@ -146,19 +146,18 @@ function FundDialog(props) {
     }
   };
   const handleInvestSubmit = () => {
-    console.log("hello");
     authFetch({
       url: "/invest",
       method: "POST",
       body: JSON.stringify({
-        projectID: props.projectID,
+        projectID: props.project._id,
         amount: amount
       })
     }).then(res => {
       if (res.error) {
         alert("ERROR");
       } else {
-        console.log("/profile/" + sessionStorage.getItem("user")._id);
+        window.location.reload();
       }
     });
   };
@@ -203,7 +202,6 @@ function DetailedProjectView(props) {
   const [fundDialog, setFundDialog] = useState(false);
 
   const project = props.project;
-  //console.log(projects);
 
   const [value, setValue] = useState(0);
 
@@ -382,7 +380,7 @@ function DetailedProjectView(props) {
                       className={classNames(classes.authorInfo)}
                     >
                       <Avatar src={coffeeCup} size />
-                      <Typography variant="p2">{project.author}</Typography>
+                      <Typography variant="p2">{project.authorName}</Typography>
                       <Typography variant="p2" color="textSecondary">
                         {project.location}
                       </Typography>
@@ -412,7 +410,7 @@ function DetailedProjectView(props) {
       <FundDialog
         fundDialog={fundDialog}
         setFundDialog={setFundDialog}
-        projectID={project._id}
+        project={project}
       />
     </div>
   );
