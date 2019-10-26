@@ -67,6 +67,9 @@ const projectSchema = new Schema(
     authorName: {
       type: String,
       required: true
+    },
+    deadline: {
+      type: Date
     }
   },
   {

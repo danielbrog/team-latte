@@ -29,6 +29,7 @@ import coffeeCup from "../assets/coffee-cup.jpg";
 import { lighten } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import theme from "../themes/theme";
+import moment from "moment";
 
 const useStyles = makeStyles(createTheme => ({
   fundDialog: {
@@ -202,6 +203,9 @@ function DetailedProjectView(props) {
   const [fundDialog, setFundDialog] = useState(false);
 
   const project = props.project;
+  const deadlineDays = Math.round(
+    Math.abs((new Date(project.deadline) - new Date()) / (24 * 60 * 60 * 1000))
+  );
 
   const [value, setValue] = useState(0);
 
@@ -366,10 +370,21 @@ function DetailedProjectView(props) {
                         alignItems="center"
                         className={classNames(classes.countdownBox)}
                       >
-                        <Typography variant="h6">44</Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          days to go
-                        </Typography>
+                        {deadlineDays >= 0 ? (
+                          <div>
+                            <Typography variant="h6">{deadlineDays}</Typography>
+                            <Typography variant="body2" color="textSecondary">
+                              days to go
+                            </Typography>
+                          </div>
+                        ) : (
+                          <div>
+                            <Typography variant="h6"> </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                              Funding Closed
+                            </Typography>
+                          </div>
+                        )}
                       </Grid>
                     </Grid>
 

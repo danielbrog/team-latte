@@ -96,6 +96,7 @@ function LaunchDetails(props) {
     title: "",
     subtitle: "",
     fundingGoal: "",
+    deadline: "",
     images: ""
   });
 
@@ -121,45 +122,64 @@ function LaunchDetails(props) {
     }
   };
 
+  const handleDeadlineChange = name => event => {
+    setProject({
+      ...project,
+      [name]: event.target.value
+    });
+  };
+
   const submit = event => {
-    console.log(project);
-    if (files.length > 0) {
-      const formData = new FormData();
-      files.map(file => {
-        formData.append("images", file);
-      });
-      Object.entries(project).forEach(([key, val]) => {
-        formData.append(key, val);
-      });
-      formData.append("launch", true);
-      authFetch({
-        url: "/project",
-        method: "POST",
-        isForm: true,
-        formData
-      }).then(res => {
-        if (res.error) {
-          console.log(res.error);
-        } else {
-          window.location.replace(
-            "/profile/" + JSON.parse(window.sessionStorage.getItem("user"))._id
-          );
-        }
-      });
+    if (
+      !/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/.test(
+        project.deadline
+      )
+    ) {
+      alert("Deadline in the wrong format, should be YYYY-MM-DD");
+    } else if (files.length < 1) {
+      alert("Please upload at least 1 image.");
     } else {
-      authFetch({
-        url: "/project",
-        method: "PUT",
-        body: JSON.stringify(project)
-      }).then(res => {
-        if (res.error) {
-          console.log(res.error);
-        } else {
-          window.location.replace(
-            "/profile/" + JSON.parse(window.sessionStorage.getItem("user"))._id
-          );
-        }
-      });
+      console.log(project);
+      if (files.length > 0) {
+        const formData = new FormData();
+        files.map(file => {
+          formData.append("images", file);
+        });
+        Object.entries(project).forEach(([key, val]) => {
+          formData.append(key, val);
+        });
+        formData.append("launch", true);
+        authFetch({
+          url: "/project",
+          method: "POST",
+          isForm: true,
+          formData
+        }).then(res => {
+          if (res.error) {
+            console.log(res.error);
+          } else {
+            window.location.replace(
+              "/profile/" +
+                JSON.parse(window.sessionStorage.getItem("user"))._id
+            );
+          }
+        });
+      } else {
+        authFetch({
+          url: "/project",
+          method: "POST",
+          body: JSON.stringify(project)
+        }).then(res => {
+          if (res.error) {
+            console.log(res.error);
+          } else {
+            window.location.replace(
+              "/profile/" +
+                JSON.parse(window.sessionStorage.getItem("user"))._id
+            );
+          }
+        });
+      }
     }
   };
 
@@ -328,6 +348,16 @@ function LaunchDetails(props) {
                 <InputAdornment position="start">$</InputAdornment>
               )
             }}
+          />
+          {/* Funding Goal Deadline */}
+          <TextField
+            placeholder="YYYY-MM-DD"
+            variant="outlined"
+            margin="normal"
+            className={classNames(classes.select)}
+            label="FUNDING DEADLINE"
+            value={project.deadline}
+            onChange={handleDeadlineChange("deadline")}
           />
 
           {/* Images Selector */}
