@@ -372,9 +372,10 @@ function DetailedProjectView(props) {
                       >
                         {deadlineDays >= 0 ? (
                           <div>
+                            {deadlineDays > 0}
                             <Typography variant="h6">{deadlineDays}</Typography>
                             <Typography variant="body2" color="textSecondary">
-                              days to go
+                              day{deadlineDays > 1 ? "s" : ""} to go
                             </Typography>
                           </div>
                         ) : (
