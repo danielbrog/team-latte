@@ -222,6 +222,7 @@ function DetailedProjectView(props) {
         onClose={props.clickClose}
         className={classes.dialogSize}
         maxWidth="lg"
+        fullWidth="true"
       >
         <Grid>
           <DialogTitle className={classes.dialogTitle}>
@@ -254,12 +255,15 @@ function DetailedProjectView(props) {
                   <CardContent>
                     <Grid item xs="12">
                       <CardMedia
-                        image={coffeeCup}
+                        image={
+                          project.photos.length > 0
+                            ? project.photos[0].photo.link
+                            : ""
+                        }
                         component="img"
                         alt={project.title}
                         className={classes.media}
                       />
-                      {/*How can we specify which uploaded photo be used for the card pic? */}
                     </Grid>
                     <Grid item xs="12" wrap="wrap">
                       <Tabs
@@ -269,11 +273,12 @@ function DetailedProjectView(props) {
                         variant="scrollable"
                       >
                         <Tab label="About" />
+                        {/*
                         <Tab label="Team" />
                         <Tab label="Market Size" />
                         <Tab label="Traction" />
                         <Tab label="Goals" />
-                        <Tab label="Investment" />
+                        <Tab label="Investment" /> */}
                       </Tabs>
                     </Grid>
                     <Grid>
@@ -281,9 +286,7 @@ function DetailedProjectView(props) {
                         <Typography>{project.description}</Typography>
                       )}
                       {value === 1 && (
-                        <Typography>
-                          {project.description.substring(0, 100)}
-                        </Typography>
+                        <Typography>{project.description}</Typography>
                       )}
                       {value === 2 && (
                         <Typography>
@@ -359,7 +362,9 @@ function DetailedProjectView(props) {
                         alignContent="stretch"
                         className={classNames(classes.countdownBox)}
                       >
-                        <Typography variant="h6">82</Typography>
+                        <Typography variant="h6">
+                          {project.investments.length}
+                        </Typography>
                         <Typography variant="body2" color="textSecondary">
                           backers
                         </Typography>

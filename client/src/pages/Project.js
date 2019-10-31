@@ -57,7 +57,6 @@ export default function ProjectList(props) {
   // const [projects, setProject] = useState(props.projectData)
 
   const projects = props.projectData;
-  console.log(projects);
   return (
     <div>
       <Grid container justify="flexStart">

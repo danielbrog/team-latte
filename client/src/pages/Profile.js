@@ -145,9 +145,7 @@ export default function ProfilePage(props) {
         if (res.error) {
           clearing();
         } else {
-          console.log(res.projects);
           setInvestedProjects(res.projects);
-          console.log(investedProjects);
         }
       }
     );
