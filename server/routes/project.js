@@ -163,8 +163,8 @@ router.put(
 
 //TODO implement this method such that it uses pagination and returns 20 projects at a time, ordered by date
 router.get("/projects", async (req, res) => {
-  const pageNo = req.query.pageNo;
-  const size = req.query.size;
+  const { pageNo, size } = req.query;
+
   try {
     const projects = await Project.find({}, [], {
       skip: pageNo * size,
