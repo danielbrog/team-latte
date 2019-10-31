@@ -106,9 +106,8 @@ export default function EditDialog(props) {
               alignContent="center"
               alignItems="center"
               direction="column"
-              style={{ border: "2px solid red" }}
             >
-              <Grid item style={{ border: "2px solid red" }}>
+              <Grid item>
                 <Avatar
                   alt={!profile ? "" : profile.name}
                   src={

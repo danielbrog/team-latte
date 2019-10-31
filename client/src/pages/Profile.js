@@ -16,16 +16,10 @@ import MessageDialog from "./Message";
 import classNames from "classnames";
 
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import JHAvatar from "../assets/jh-avatar.jpg";
-import coffeeCup from "../assets/coffee-cup.jpg";
-import espresso from "../assets/espresso.jpg";
-import espresso2 from "../assets/espresso2.jpg";
-import pouringCoffee from "../assets/pouring-coffee.jpg";
 import angellist from "../assets/angellist.png";
 import linkedin from "../assets/linkedin.png";
 import "./Profile.css";
 import authFetch from "../utilities/auth";
-import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles(createTheme => ({
   avatar: {
@@ -57,55 +51,6 @@ const useStyles = makeStyles(createTheme => ({
     paddingTop: createTheme.spacing(5)
   }
 }));
-
-const fieldsData = ["TECHNOLOGY", "COFFEE", "CUSTOMER SERVICE", "RESTAURANT"];
-
-const projectData = [
-  {
-    img: coffeeCup,
-    category: "Food and Craft",
-    alt: "Coffee Cup",
-    field: "Customer Service",
-    title: "Urban Jungle: eco-friendly coffee shop",
-    raised: "23,874",
-    goal: "40,000",
-    equity: "10%",
-    daysToGo: "44"
-  },
-  {
-    img: espresso,
-    category: "Food and Craft",
-    alt: "Espresso",
-    field: "Coffee",
-    title: "Energy Run: the quickest coffee experience",
-    raised: "7,257",
-    goal: "12,383",
-    equity: "13%",
-    daysToGo: "19"
-  },
-  {
-    img: espresso,
-    category: "Food and Craft",
-    alt: "Espresso",
-    field: "Coffee",
-    title: "Energy Run: the quickest coffee experience",
-    raised: "7,257",
-    goal: "12,383",
-    equity: "13%",
-    daysToGo: "19"
-  },
-  {
-    img: pouringCoffee,
-    category: "Life Hacks",
-    alt: "Pouring Coffee",
-    field: "Restaurant",
-    title: "Energy Rush: an even quicker coffee experience",
-    raised: "34,912",
-    goal: "50,000",
-    equity: "5%",
-    daysToGo: "5"
-  }
-];
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
