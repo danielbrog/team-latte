@@ -16,8 +16,6 @@ import DetailedProjectView from "./DetailedProjectView";
 const useStyles = makeStyles(theme => ({
   card: {
     margin: "20px 10px 20px 10px",
-    maxWidth: 320,
-    maxHeight: 500,
     borderRadius: 0
   },
 
