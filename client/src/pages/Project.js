@@ -16,9 +16,13 @@ import DetailedProjectView from "./DetailedProjectView";
 const useStyles = makeStyles(theme => ({
   card: {
     margin: "20px 10px 20px 10px",
+    maxWidth: 320,
+    maxHeight: 500,
     borderRadius: 0
   },
-
+  container: {
+    width: "100%"
+  },
   media: {
     height: 245
   },
@@ -55,6 +59,7 @@ export default function ProjectList(props) {
   // const [projects, setProject] = useState(props.projectData)
 
   const projects = props.projectData;
+  console.log(projects);
   return (
     <div>
       <Grid container justify="flexStart">

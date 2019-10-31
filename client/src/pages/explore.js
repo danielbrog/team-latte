@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Typography, makeStyles, Grid, Select, TextField, MenuItem } from "@material-ui/core";
+import {
+  Typography,
+  makeStyles,
+  Grid,
+  Select,
+  TextField,
+  MenuItem
+} from "@material-ui/core";
 import classNames from "classnames";
 import coffeeCup from "../assets/coffee-cup.jpg";
 import espresso from "../assets/espresso.jpg";
@@ -7,7 +14,6 @@ import pouringCoffee from "../assets/pouring-coffee.jpg";
 import ProjectList from "./Project";
 import authFetch from "../utilities/auth";
 import InfiniteScroll from "react-infinite-scroller";
-
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -23,14 +29,13 @@ const useStyles = makeStyles(theme => ({
     minWidth: 215
   },
   flexContainer: {
-    display: "flex",
     margin: "40px 10%"
   }
 }));
 
 const mockProjectData = [
   {
-    id:'1',
+    id: "1",
     img: coffeeCup,
     category: "Food and Craft",
     alt: "Coffee Cup",
@@ -45,7 +50,7 @@ const mockProjectData = [
     src: ""
   },
   {
-    id:'2',
+    id: "2",
     img: espresso,
     category: "Food and Craft",
     alt: "Espresso",
@@ -60,7 +65,7 @@ const mockProjectData = [
     src: ""
   },
   {
-    id:'3',
+    id: "3",
     img: pouringCoffee,
     category: "Life Hacks",
     alt: "Pouring Coffee",
@@ -75,7 +80,7 @@ const mockProjectData = [
     src: ""
   },
   {
-    id:'4',
+    id: "4",
     img: pouringCoffee,
     category: "Life Hacks",
     alt: "Pouring Coffee",
@@ -90,7 +95,7 @@ const mockProjectData = [
     src: ""
   },
   {
-    id:'5',
+    id: "5",
     img: pouringCoffee,
     category: "Life Hacks",
     alt: "Pouring Coffee",
@@ -128,7 +133,7 @@ function Explore() {
   const [hasMore, setHasMore] = useState(true);
   const [cursor, setCursor] = useState(0);
 
-//console.log(projects)
+  //console.log(projects)
 
   const [filterQuery, setFilterQuery] = useState({
     industry: "",
@@ -168,7 +173,6 @@ function Explore() {
     const { industry, deadline, location } = filterQuery; //TODO using deadline yet, it should the project timestamp and subtract dates
     //Shouldn't deadline's & location's positions be FLIPPED??
 
-
     //Check issue # ...
     return projects.filter(
       // for each array's element (which are objects for project info)
@@ -186,7 +190,7 @@ function Explore() {
     authFetch({
       url: "/projects?pageNo=" + cursor + "&size=3"
     }).then(res => {
-      if (res.error) {
+      if (res.error || res.status == 304) {
         console.log(res);
         setHasMore(false);
       } else {
@@ -208,7 +212,9 @@ function Explore() {
           value={filterQuery.industry}
           className={classNames(classes.select)}
           variant="outlined"
-          input={<TextField variant="outlined" margin="normal" label="Industries" />}
+          input={
+            <TextField variant="outlined" margin="normal" label="Industries" />
+          }
         >
           <MenuItem value={""}>{}</MenuItem>
           {industries.map(industry => (
@@ -237,7 +243,6 @@ function Explore() {
 
       {projects && (
         <div className={classes.flexContainer}>
-
           <InfiniteScroll
             pageStart={0}
             loadMore={loadMore}
@@ -248,9 +253,7 @@ function Explore() {
               </div>
             }
           >
-            <ProjectList
-            projectData={filterProjects(projects)}
-          />
+            <ProjectList projectData={filterProjects(projects)} />
           </InfiniteScroll>
         </div>
       )}
