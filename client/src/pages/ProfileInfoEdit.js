@@ -28,7 +28,7 @@ export default function EditDialog(props) {
   const [open, setOpen] = useState(false);
 
   const modifyProfileInfo = profileInfo => {
-    if (files.length == 1) {
+    if (files.length === 1) {
       const formData = new FormData();
       formData.append("profile", files[0]);
       Object.entries(profileInfo).forEach(([key, val]) => {

@@ -55,19 +55,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ProjectList(props) {
-  const classes = useStyles();
-  // const [projects, setProject] = useState(props.projectData)
-
   const projects = props.projectData;
-  console.log(projects);
+
   return (
     <div>
-      <Grid container justify="flexStart">
+      <Grid container>
         {!projects ? (
           <div></div>
         ) : (
           projects.map(project => (
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={6} md={4} key={project._id}>
               <ProjectCard
                 onClick={props.onClick}
                 withAuthor={props.withAuthor}

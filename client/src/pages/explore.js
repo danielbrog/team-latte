@@ -53,7 +53,7 @@ function Explore() {
     projects.forEach(project => {
       setUniqueIndustries(uniqueIndustries.add(project.industry)); //Adding each project's industry in the Set
     });
-  }, [projects]); //projects array changes, it will rerender
+  }, [projects, uniqueIndustries]); //projects array changes, it will rerender
 
   const onChangeFilter = event => {
     setHasMore(true); //download more objects incase it's needed
@@ -61,14 +61,8 @@ function Explore() {
     setFilterQuery({ ...filterQuery, [name]: value });
   };
 
-  const clearing = () => {
-    window.localStorage.clear();
-    window.sessionStorage.clear();
-    window.location.replace("/login");
-  };
-
   const filterProjects = projects => {
-    const { industry, deadline, location } = filterQuery; //TODO using deadline yet, it should the project timestamp and subtract dates
+    const { industry, location } = filterQuery; //TODO using deadline yet, it should the project timestamp and subtract dates
 
     //Check issue # ...
     return projects.filter(
