@@ -16,8 +16,6 @@ import {
   Avatar,
   InputAdornment,
   CardContent,
-  Divider,
-  Box,
   LinearProgress
 } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/styles";
@@ -29,7 +27,6 @@ import coffeeCup from "../assets/coffee-cup.jpg";
 import { lighten } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import theme from "../themes/theme";
-import moment from "moment";
 
 const useStyles = makeStyles(createTheme => ({
   fundDialog: {
@@ -109,40 +106,13 @@ const BorderLinearProgress = withStyles({
   }
 })(LinearProgress);
 
-const project = {
-  category: "Life Hacks",
-  alt: "Pouring Coffee",
-  industry: "Restaurant",
-  title: "Energy Rush: an even quicker coffee experience",
-  raised: "34,912",
-  goal: "50,000",
-  equity: "5%",
-  daysToGo: "5",
-  author: "Jerry",
-  location: "NYC, NY",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  images: "...",
-  summaryPoints: ["Lower Expenses", "Feature 2", "Feature 3"],
-  teamMembers: [
-    {
-      name: "Person A",
-      image: { coffeeCup }
-    },
-    {
-      name: "Person B",
-      image: { coffeeCup }
-    }
-  ]
-};
-
 function FundDialog(props) {
   const classes = useStyles();
   const [amount, setAmount] = useState("");
 
   const handleAmountChange = event => {
     console.log(props.projectID);
-    if (/^([1-9][0-9]*[\.]{0,1}[0-9]{0,2})?$/.test(event.target.value)) {
+    if (/^([1-9][0-9]*[.]{0,1}[0-9]{0,2})?$/.test(event.target.value)) {
       setAmount(event.target.value);
     }
   };
@@ -222,7 +192,7 @@ function DetailedProjectView(props) {
         onClose={props.clickClose}
         className={classes.dialogSize}
         maxWidth="lg"
-        fullWidth="true"
+        fullWidth={true}
       >
         <Grid>
           <DialogTitle className={classes.dialogTitle}>
@@ -235,9 +205,11 @@ function DetailedProjectView(props) {
                 classes.chipPosition
               )}
             />
-            <Typography variant="h5" color="textPrimary">
-              {project.title}
-            </Typography>
+            <div>
+              <Typography variant="h4" color="textPrimary">
+                {project.title}
+              </Typography>
+            </div>
             <Typography variant="body2" color="textSecondary">
               {project.subtitle
                 ? project.subtitle
@@ -246,14 +218,14 @@ function DetailedProjectView(props) {
           </DialogTitle>
         </Grid>
 
-        <Grid xs="12" className={classNames(classes.bothCards)}>
+        <Grid item xs={12} className={classNames(classes.bothCards)}>
           <DialogContent>
-            <Grid container spacing="5">
+            <Grid container spacing={5}>
               {/* Left card */}
-              <Grid container xs="8">
+              <Grid container item xs={8}>
                 <Card className={classes.leftCard}>
                   <CardContent>
-                    <Grid item xs="12">
+                    <Grid item xs={12}>
                       <CardMedia
                         image={
                           project.photos.length > 0
@@ -265,7 +237,7 @@ function DetailedProjectView(props) {
                         className={classes.media}
                       />
                     </Grid>
-                    <Grid item xs="12" wrap="wrap">
+                    <Grid item xs={12}>
                       <Tabs
                         value={value}
                         onChange={handleTabChange}
@@ -314,7 +286,7 @@ function DetailedProjectView(props) {
               </Grid>
 
               {/* Right card */}
-              <Grid container xs="4" direction="column">
+              <Grid container item xs={4} direction="column">
                 <Card>
                   <CardContent>
                     <Grid
@@ -332,7 +304,7 @@ function DetailedProjectView(props) {
                       </Typography>
                     </Grid>
 
-                    <Grid justify="center" alignItems="center">
+                    <Grid>
                       <BorderLinearProgress
                         variant="determinate"
                         value={raisedAmount}
@@ -356,12 +328,7 @@ function DetailedProjectView(props) {
                       alignItems="center"
                       className={classNames(classes.countdown)}
                     >
-                      <Grid
-                        item
-                        justify="center"
-                        alignContent="stretch"
-                        className={classNames(classes.countdownBox)}
-                      >
+                      <Grid item className={classNames(classes.countdownBox)}>
                         <Typography variant="h6">
                           {project.investments.length}
                         </Typography>
@@ -369,12 +336,7 @@ function DetailedProjectView(props) {
                           backers
                         </Typography>
                       </Grid>
-                      <Grid
-                        item
-                        justify="center"
-                        alignItems="center"
-                        className={classNames(classes.countdownBox)}
-                      >
+                      <Grid item className={classNames(classes.countdownBox)}>
                         {deadlineDays >= 0 ? (
                           <div>
                             {deadlineDays > 0}
@@ -400,9 +362,9 @@ function DetailedProjectView(props) {
                       alignItems="center"
                       className={classNames(classes.authorInfo)}
                     >
-                      <Avatar src={coffeeCup} size />
-                      <Typography variant="p2">{project.authorName}</Typography>
-                      <Typography variant="p2" color="textSecondary">
+                      <Avatar src={coffeeCup} />
+                      <Typography>{project.authorName}</Typography>
+                      <Typography color="textSecondary">
                         {project.location}
                       </Typography>
                     </Grid>

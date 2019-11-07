@@ -36,6 +36,7 @@ export default function Fields(props) {
           color="primary"
           size="small"
           className={classNames(classes.field, classes.chip)}
+          key={field}
         />
       ))}
     </Grid>

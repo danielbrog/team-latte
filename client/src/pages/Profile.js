@@ -81,7 +81,6 @@ export default function ProfilePage(props) {
         clearing();
       } else {
         setProfile(res.profile);
-        console.log(res.projects);
         setProjects(res.projects);
       }
     }, []);
@@ -94,7 +93,7 @@ export default function ProfilePage(props) {
         }
       }
     );
-  }, []);
+  }, [props.match.params.id]);
 
   //console.log(profile)
   const classes = useStyles();
@@ -104,11 +103,6 @@ export default function ProfilePage(props) {
     window.location.replace("/login");
   };
 
-  const checkToken = () => {
-    window.sessionStorage.getItem("AuthToken")
-      ? console.log("hello")
-      : console.log("get out!");
-  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -165,11 +159,11 @@ export default function ProfilePage(props) {
               //&& window.sessionStorage.getItem('user')._id === props.match.params.id
               //JSON.parse(window.sesssionStorage.getItem('user))._id
 
-              <Grid container justify="center" className={checkToken}>
+              <Grid container justify="center">
                 <EditDialog profile={profile} setProfile={setProfile} />
               </Grid>
             ) : (
-              <Grid container justify="center" className={checkToken}>
+              <Grid container justify="center">
                 <Button variant="outlined">Add Friend</Button>
               </Grid>
             )}

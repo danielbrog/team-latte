@@ -115,7 +115,7 @@ function LaunchDetails(props) {
   };
 
   const handleFundingChange = name => event => {
-    if (/^[0-9]*[\.]{0,1}[0-9]{0,2}$/.test(event.target.value)) {
+    if (/^[0-9]*[.]{0,1}[0-9]{0,2}$/.test(event.target.value)) {
       setProject({
         ...project,
         [name]: event.target.value
@@ -152,7 +152,7 @@ function LaunchDetails(props) {
       console.log(project);
       if (files.length > 0) {
         const formData = new FormData();
-        files.map(file => {
+        files.forEach(file => {
           formData.append("images", file);
         });
         Object.entries(project).forEach(([key, val]) => {
@@ -196,7 +196,7 @@ function LaunchDetails(props) {
   return (
     <div>
       <Grid container>
-        <Grid className={classNames(classes.leftSection)} xs={4}>
+        <Grid item className={classNames(classes.leftSection)} xs={4}>
           <Typography
             className={classNames(classes.displayTitle)}
             gutterBottom
