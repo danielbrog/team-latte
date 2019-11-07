@@ -70,6 +70,10 @@ const projectSchema = new Schema(
     },
     deadline: {
       type: Date
+    },
+    equityExchange: {
+      type: Number,
+      required: true
     }
   },
   {

@@ -97,7 +97,8 @@ function LaunchDetails(props) {
     subtitle: "",
     fundingGoal: "",
     deadline: "",
-    images: ""
+    images: "",
+    equityExchange: ""
   });
 
   const onChangeSelect = event => {
@@ -115,6 +116,15 @@ function LaunchDetails(props) {
 
   const handleFundingChange = name => event => {
     if (/^[0-9]*[\.]{0,1}[0-9]{0,2}$/.test(event.target.value)) {
+      setProject({
+        ...project,
+        [name]: event.target.value
+      });
+    }
+  };
+
+  const handleEquityChange = name => event => {
+    if (/^([1-9][0-9]?|100)$/.test(event.target.value)) {
       setProject({
         ...project,
         [name]: event.target.value
@@ -347,6 +357,20 @@ function LaunchDetails(props) {
               startAdornment: (
                 <InputAdornment position="start">$</InputAdornment>
               )
+            }}
+          />
+
+          {/* Equity Exchange Selector */}
+          <TextField
+            variant="outlined"
+            margin="normal"
+            className={classNames(classes.select)}
+            label="EQUITY EXCHANGE"
+            value={project.equityExchange}
+            onChange={handleEquityChange("equityExchange")}
+            helperText="Equity exchanged for the fully funded project"
+            InputProps={{
+              endAdornment: <InputAdornment position="end">%</InputAdornment>
             }}
           />
           {/* Funding Goal Deadline */}
