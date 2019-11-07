@@ -84,6 +84,11 @@ export default function ProjectList(props) {
 function ProjectCard(props) {
   const mainClasses = useStyles();
   const fieldsClasses = fieldsStyle();
+  const deadlineDays = Math.round(
+    Math.abs(
+      (new Date(props.project.deadline) - new Date()) / (24 * 60 * 60 * 1000)
+    )
+  );
 
   const [open, setOpen] = useState(false);
   const handleOpenClick = () => {
@@ -124,11 +129,18 @@ function ProjectCard(props) {
           </Typography>
 
           <Typography variant="body2" color="textSecondary" component="h2">
-            Equity exchange: {props.project.equity}%{" "}
+            Equity exchange:{" "}
+            {props.project.equityExchange ? props.project.equityExchange : "0"}%{" "}
           </Typography>
           <br />
           <Typography variant="body2" color="textSecondary" component="h2">
-            {props.project.daysToGo} days to go{" "}
+            {deadlineDays >= 0 ? (
+              <div>
+                {deadlineDays} day{deadlineDays > 1 ? "s" : ""} to go
+              </div>
+            ) : (
+              "Finished Funding"
+            )}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -30,7 +30,8 @@ router.post("/project", auth, upload.array("images", 5), async (req, res) => {
     photos: [],
     author: req.user._id,
     authorName: req.user.name,
-    funding_goal: parseFloat(req.body.fundingGoal)
+    funding_goal: parseFloat(req.body.fundingGoal),
+    equityExchange: parseInt(req.body.equityExchange)
   });
 
   // console.log(project.author);
