@@ -58,10 +58,7 @@ const detailedView = makeStyles({
     border: "2px solid red",
     justifyContent: "center"
   },
-  bothCards: {
-    flexDirection: "row",
-    justifyContent: "space-evenly"
-  },
+  bothCards: {},
   rightCard: {
     margin: theme.spacing(3)
   },
@@ -87,9 +84,7 @@ const detailedView = makeStyles({
     flexDirection: "column"
   },
   fundButton: {
-    backgroundColor: "#69E781",
-    margin: theme.spacing(2, 0, 2),
-    color: "white"
+    margin: theme.spacing(2, 0, 2)
   }
 });
 
@@ -205,11 +200,10 @@ function DetailedProjectView(props) {
                 classes.chipPosition
               )}
             />
-            <div>
-              <Typography variant="h4" color="textPrimary">
-                {project.title}
-              </Typography>
-            </div>
+            <div></div>
+            <Typography variant="h4" color="textPrimary">
+              {project.title}
+            </Typography>
             <Typography variant="body2" color="textSecondary">
               {project.subtitle
                 ? project.subtitle
@@ -222,7 +216,7 @@ function DetailedProjectView(props) {
           <DialogContent>
             <Grid container spacing={5}>
               {/* Left card */}
-              <Grid container item xs={8}>
+              <Grid container item md={8} sm={12}>
                 <Card className={classes.leftCard}>
                   <CardContent>
                     <Grid item xs={12}>
@@ -286,7 +280,7 @@ function DetailedProjectView(props) {
               </Grid>
 
               {/* Right card */}
-              <Grid container item xs={4} direction="column">
+              <Grid container item md={4} sm={12} direction="column">
                 <Card>
                   <CardContent>
                     <Grid
@@ -375,9 +369,11 @@ function DetailedProjectView(props) {
                           Send Message
                         </Button>
                         <Button
+                          variant="contained"
                           onClick={() => setFundDialog(true)}
                           className={classNames(classes.fundButton)}
                           fullWidth
+                          color="primary"
                         >
                           Fund This Project
                         </Button>
