@@ -42,13 +42,24 @@ const useStyles = makeStyles(createTheme => ({
     padding: 20
   },
   leftSection: {
-    paddingTop: createTheme.spacing(10),
-    borderRight: "10px solid",
-    borderImage: "linear-gradient(to right, #CCCCCC, rgba(0, 0, 0, 0)) 1 100%;"
+    [createTheme.breakpoints.down("sm")]: {
+      paddingTop: createTheme.spacing(5),
+      paddingLeft: createTheme.spacing(5),
+      paddingRight: createTheme.spacing(5)
+    },
+    [createTheme.breakpoints.up("md")]: {
+      paddingTop: createTheme.spacing(10),
+      borderRight: "10px solid",
+      borderImage:
+        "linear-gradient(to right, #CCCCCC, rgba(0, 0, 0, 0)) 1 100%;"
+    }
   },
   rightSection: {
     paddingLeft: createTheme.spacing(5),
-    paddingTop: createTheme.spacing(5)
+    paddingTop: createTheme.spacing(5),
+    [createTheme.breakpoints.down("sm")]: {
+      paddingRight: createTheme.spacing(5)
+    }
   }
 }));
 
@@ -115,7 +126,8 @@ export default function ProfilePage(props) {
         {/* Left part */}
         <Grid
           item
-          xs={3}
+          sm={12}
+          md={3}
           className={classNames(classes.leftSection)}
           style={{ minHeight: "200px" }}
         >
@@ -200,7 +212,7 @@ export default function ProfilePage(props) {
         </Grid>
 
         {/* Right part*/}
-        <Grid item xs={8} className={classNames(classes.rightSection)}>
+        <Grid item sm={12} md={8} className={classNames(classes.rightSection)}>
           <Tabs
             value={value}
             onChange={handleChange}
